@@ -1,26 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
+import Header from './components/Header';
+import Search from './components/Search';
+import Filters from './components/Filters';
+import Items from './components/Items';
+import Footer from './components/Footer';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const items = require('./magicItems.json');
+
+class App extends React.Component {
+  state = {
+    items: []
+  };
+
+  checkFilters (filters) { 
+    const filteredItems = items.filter( item => {
+      const iType = item.type.toLowerCase().replace(' ','-');
+      const iRarity = item.rarity.toLowerCase().replace(' ','-');
+
+      return filters.includes(iType)
+        //filters.includes(item.rarity.toLowerCase().replace(' ','-'))
+        //filters.includes(item.tags.toLowerCase().replace(' ','-'))
+      // ) 
+    });
+
+    console.log(filteredItems);
+      }
+
+  render() {
+    //console.log(items);
+    return (
+      <div className="App">
+        <Header />
+        <Search />
+        <Filters checkFilters={this.checkFilters} />
+        <Items />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;
