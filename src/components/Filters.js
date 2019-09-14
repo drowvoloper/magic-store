@@ -1,6 +1,11 @@
 import React from 'react';
 
-let filters = [];
+let filters = {
+                type: [],
+                rarity: [],
+                tag: [],
+                attunement: []
+};
 const types = [ 'Armor',
                 'Potion',
                 'Ring',
@@ -65,17 +70,17 @@ function Filters({checkFilters}) {
   const handleClick = event => {
 
     const filter = event.target.value;
+    const name = event.target.name;
     // if filter already exists, remove it
     // otherwise includes this new filter to the array
-    if (filters.includes(filter)) {
-      filters.splice(filters.indexOf(filter),1);
+    if (filters[name].includes(filter)) {
+      filters[name].splice(filters[name].indexOf(filter),1);
     } else {
-      filters.push(filter);
+      filters[name].push(filter);
     }
 
     // we call the method from App.js
     checkFilters(filters);
-    // console.log(filters);
   };
 
   // Filter for types
@@ -85,7 +90,7 @@ function Filters({checkFilters}) {
         <div className="filter-type"> 
           <input 
             type="checkbox" 
-            name="type" 
+            name="type"
             value={type.toLowerCase().replace(' ','-')} 
             className="filter-checkbox"
             onClick={handleClick}
@@ -117,13 +122,18 @@ function Filters({checkFilters}) {
   // Filter for tags
   const tagsFilter = tags.map( tag => {
     return (
-      <option 
-        key={tags.indexOf(tag)}
-        value={tag.toLowerCase().replace(' ','-')}
-        onClick={handleClick}
-      >
-        {tag}
-      </option>
+      <label key={tags.indexOf(tag)}>
+        <div className="filter-tag">
+          <input
+            type="checkbox"
+            name="tag"
+            value={tag.toLowerCase().replace(' ','-')}
+            className="checkbox-tag"
+            onClick={handleClick}
+          />
+          <p>{tag}</p>
+        </div>
+      </label>
     );
   });
 
@@ -143,21 +153,21 @@ function Filters({checkFilters}) {
         <hr/>
         <div className="items-tags">
           <h4>Tags:</h4>
-          <select name="tags" form="filterForm">
-            {tagsFilter}
-          </select>
+          {tagsFilter}
         </div>
         <hr/>
         <div className="items-attunement">
           <h4>Attunement:</h4>
           <label>
-            <input 
-              type="checkbox" 
-              name="attunement" 
-              value="yes" 
-              onClick={handleClick}
-            />
-            <p>Yes</p>
+            <div className="input-attunement">
+              <input 
+                type="checkbox" 
+                name="attunement" 
+                value="yes" 
+                onClick={handleClick}
+              />
+              <p>Yes</p>
+            </div>
           </label>
           <label>
             <input 
