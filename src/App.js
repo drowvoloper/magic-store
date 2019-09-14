@@ -6,27 +6,32 @@ import Items from './components/Items';
 import Footer from './components/Footer';
 import './App.css';
 
-const items = require('./magicItems.json');
+class App extends React.Component {i
+  constructor() {
+    super();
+    this.state = {
+                  type: [],
+                  rarity: [],
+                  tag: [],
+                  attunement: []
+    };
 
-class App extends React.Component {
-  state = {
-    items: []
-  };
+    this.checkFilters = this.checkFilters.bind(this);
+  }
 
   checkFilters (filters) { 
-    const filteredItems = items.filter( item => {
-      const iType = item.type.toLowerCase().replace(' ','-');
-      const iRarity = item.rarity.toLowerCase().replace(' ','-');
+    const { type, rarity, tag, attunement} = filters;
 
-      return filters.includes(iType)
-        //filters.includes(item.rarity.toLowerCase().replace(' ','-'))
-        //filters.includes(item.tags.toLowerCase().replace(' ','-'))
-      // ) 
+    this.setState({
+      "type": [type],
+      "rarity": [rarity],
+      "tag": [tag],
+      "attunement": [attunement]
     });
 
-    console.log(filteredItems);
-      }
+    //console.log(this.state);
 
+      }
   render() {
     //console.log(items);
     return (
@@ -34,7 +39,7 @@ class App extends React.Component {
         <Header />
         <Search />
         <Filters checkFilters={this.checkFilters} />
-        <Items />
+        <Items itemsToShow={this.state} />
         <Footer />
       </div>
     );
