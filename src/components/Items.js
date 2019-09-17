@@ -13,7 +13,7 @@ function Items({itemsToShow}) {
     let show = true;
 
     // type filter
-    /*if (typeArr 
+    if (typeArr 
       && typeArr.length > 0 
       && typeArr.includes(item.type
       .toLowerCase().replace(' ','-')) === false ) {
@@ -25,33 +25,24 @@ function Items({itemsToShow}) {
       && rarityArr.includes(item.rarity
       .toLowerCase().replace(' ','-')) === false) {
       show = false;
-    }*/
+    }
     // tags filter
     if (tagArr
       && tagArr.length > 0) {
-      let counter = 0;
-
-      for (let i = 0; i < tagArr.length; i++) {
-        if (item.tags
-          .includes(tagArr[i]
-            .replace('-',' ')
-            .replace(/\w\S*/g,(txt) => {
-              return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}))) // capitalize first letter in a word
-        {
-          counter++;
+      tagArr.forEach( tag => {
+        if (!item.tags.includes(tag
+          .replace('-',' ')
+          .replace(/\w\S*/g, (text) => {            // Capitalize
+            return text.charAt(0).toUpperCase()     // First
+              + text.substr(1).toLowerCase();}))) { // Letter
+          show = false;
         }
-      }
-
-  }
-    
-    //
+      });
+    }
     return show;
-    
 }); 
-  //console.log(type);
 
   console.log(showedItems);
-  //if(type.length > 0) console.log(type[0].includes('armor'))
 
   return (
     <div className="app-items">
