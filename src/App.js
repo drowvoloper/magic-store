@@ -13,7 +13,7 @@ class App extends React.Component {i
                   type: [],
                   rarity: [],
                   tag: [],
-                  attunement: []
+                  attunement:[] 
     };
 
     this.checkFilters = this.checkFilters.bind(this);
@@ -21,19 +21,17 @@ class App extends React.Component {i
 
   checkFilters (filters) { 
     const { type, rarity, tag, attunement} = filters;
-
+    
     this.setState({
       "type": [type],
       "rarity": [rarity],
       "tag": [tag],
       "attunement": [attunement]
     });
+}
 
-    //console.log(this.state);
-
-      }
   render() {
-    //console.log(items);
+    
     return (
       <div className="App">
         <Header />

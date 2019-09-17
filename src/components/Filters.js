@@ -78,7 +78,6 @@ function Filters({checkFilters}) {
     } else {
       filters[name].push(filter);
     }
-
     // we call the method from App.js
     checkFilters(filters);
   };
@@ -163,7 +162,7 @@ function Filters({checkFilters}) {
               <input 
                 type="checkbox" 
                 name="attunement" 
-                value="yes" 
+                value={true} 
                 onClick={handleClick}
               />
               <p>Yes</p>
@@ -173,7 +172,7 @@ function Filters({checkFilters}) {
             <input 
               type="checkbox" 
               name="attunement" 
-              value="no" 
+              value={false} 
               onClick={handleClick}
             />
             <p>No</p>
