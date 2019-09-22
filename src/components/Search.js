@@ -21,10 +21,10 @@ const displayMatches = (text) => {
   const html = matchArray.map( item => {
     
       return (
-        <li key={matchArray.indexOf(item)} className="suggested-items">
+        <li key={matchArray.indexOf(item)} className="suggested-item">
           <p className="item-name" key={matchArray.indexOf(item)}>
             {reactStringReplace(item,text, (match,i) => (
-              <span key={i} style={{color:'red'}}>{match}</span>
+              <span key={i} className="highlight">{match}</span>
             ))}
           </p>
         </li>
@@ -68,7 +68,7 @@ class Search extends React.Component {
           onChange={this.handleChange}
         /> 
       </form>
-      <ul>
+      <ul className="suggested-items">
         {this.state.list}
       </ul>
     </div>

@@ -21,7 +21,7 @@ const rarities = ['Uncommon',
                   'Very Rare',
                   'Legendary'
 ];
-const tags = ['Creation',
+const tags = [
               'Healing',
               'Summoning',
               'Teleportation',
@@ -29,11 +29,9 @@ const tags = ['Creation',
               'Control',
               'Communication',
               'Buff',
-              'Social',
               'Debuff',
               'Scrying',
               'Detection',
-              'Banishment',
               'Movement',
               'Utility',
               'Exploration',
@@ -45,24 +43,12 @@ const tags = ['Creation',
               'Consumable',
               'Cursed',
               'Footwear',
-              'Belt',
-              'Necklace',
               'Jewelry',
               'Wristwear',
               'Headwear',
               'Outerwear',
-              'Eyewear',
-              'Handwear',
               'Bane',
-              'Instrument',
-              'Sentient',
-              'Tag',
-              'Tags',
-              'Eldritch Machine',
-              'Focus',
-              'Negates Difficult Terrain',
               'Artificer',
-              'Subclass Feature'
 ];
 
 function Filters({checkFilters}) {
@@ -75,8 +61,10 @@ function Filters({checkFilters}) {
     // otherwise includes this new filter to the array
     if (filters[name].includes(filter)) {
       filters[name].splice(filters[name].indexOf(filter),1);
+      event.target.parentNode.classList.remove('selected');
     } else {
       filters[name].push(filter);
+      event.target.parentNode.classList.add('selected');
     }
     // we call the method from App.js
     checkFilters(filters);
@@ -85,8 +73,9 @@ function Filters({checkFilters}) {
   // Filter for types
   const typeFilter = types.map( type => {
     return (
-      <label key={types.indexOf(type)} > 
-        <div className="filter-type"> 
+      <li key={types.indexOf(type)} className="no-display">
+      <label> 
+        <div className="filter type"> 
           <input 
             type="checkbox" 
             name="type"
@@ -97,14 +86,16 @@ function Filters({checkFilters}) {
           <p>{type}</p> 
         </div> 
       </label>
+      </li>
     )
   });
 
   // Filter for rarity
   const rarityFilter = rarities.map( rarity => {
     return (
-      <label key={rarities.indexOf(rarity)}> 
-        <div className="filter-rarity"> 
+      <li key={rarities.indexOf(rarity)} className="no-display">
+      <label> 
+        <div className="filter rarity"> 
           <input 
             type="checkbox" 
             name="rarity" 
@@ -115,51 +106,75 @@ function Filters({checkFilters}) {
           <p>{rarity}</p>
         </div>
       </label>
+    </li>
     );
   });
 
   // Filter for tags
   const tagsFilter = tags.map( tag => {
     return (
-      <label key={tags.indexOf(tag)}>
-        <div className="filter-tag">
+      <li key={tags.indexOf(tag)} className="no-display">
+      <label>
+        <div className="filter tags">
           <input
             type="checkbox"
             name="tag"
-            value={tag.toLowerCase().replace(' ','-')}
-            className="checkbox-tag"
+            value={tag.toLowerCase()}
+            className="filter-checkbox"
             onClick={handleClick}
           />
           <p>{tag}</p>
         </div>
       </label>
+    </li>
     );
   });
+
+  // Display filters
+  const displayHandler = event => {
+    const displayElements = event.target.nextSibling.childNodes;
+
+    event.target.classList.contains('active')
+      ? event.target.classList.remove('active')
+      : event.target.classList.add('active');
+
+    displayElements.forEach( element => {
+      element.classList.contains('no-display')
+        ? element.classList.remove('no-display') 
+        : element.classList.add('no-display');
+    });
+  }
 
   
   return (
     <div className="app-filter">
       <form className="filter-form" id="filterForm" >
-        <div className="items-type">
-          <h4>Type:</h4>
+        <div>
+        <h4 className="filter-btn" onClick={displayHandler}>Type</h4>
+        <ul className="items-filter">
           {typeFilter}
-        </div>
-        <hr/>
-        <div className="items-rarity">
-          <h4>Rarity:</h4>
+        </ul>
+      </div>
+      <div>
+        <h4 className="filter-btn" onClick={displayHandler}>Rarity</h4>
+        <ul className="items-filter">
           {rarityFilter}
-        </div>
-        <hr/>
-        <div className="items-tags">
-          <h4>Tags:</h4>
+        </ul>
+      </div>
+      <div>
+        <h4 className="filter-btn" onClick={displayHandler}>Tags</h4>
+        <ul className="items-filter">
           {tagsFilter}
-        </div>
-        <hr/>
-        <div className="items-attunement">
-          <h4>Attunement:</h4>
+        </ul>
+      </div>
+      <div>
+        <h4 className="filter-btn" onClick={displayHandler}>Attunement</h4>
+        <ul className="items-filter">
+          <li className="no-display">
           <label>
-            <div className="input-attunement">
-              <input 
+            <div className="filter">
+              <input
+                className="filter-checkbox"
                 type="checkbox" 
                 name="attunement" 
                 value={true} 
@@ -168,16 +183,23 @@ function Filters({checkFilters}) {
               <p>Yes</p>
             </div>
           </label>
+        </li>
+        <li className="no-display">
           <label>
-            <input 
-              type="checkbox" 
-              name="attunement" 
-              value={false} 
-              onClick={handleClick}
-            />
-            <p>No</p>
+            <div className="filter">
+              <input 
+                className="filter-checkbox"
+                type="checkbox" 
+                name="attunement" 
+                value={false} 
+                onClick={handleClick}
+              />
+              <p>No</p>
+            </div>
           </label>
-          </div>
+        </li>
+      </ul>
+    </div>
         </form>
       </div>
   );

@@ -1,6 +1,27 @@
+* {
+  margin:0;
+  padding:0;
+  content-size:content-box;
+}
+
+hr { display:none;}
+
+body {
+  overflow-X:hidden;
+}
+
+ul {
+  list-style:none;
+}
+
+/* ######### App.js ########## */
+
 .App {
   text-align: center;
 }
+
+/* ############################# */
+/* ######### Header.js ########## */
 
 .app-header {
   background-color: #4c3d1d;
@@ -13,10 +34,165 @@
   color: white;
 }
 
-.app-search {}
+/* ############################# */
+/* ######### Search.js ########## */
 
-.app-filters {}
+.app-search {
+  margin:50px;
+}
 
-.app-items {}
+.search-form {}
 
+.search-input {
+  width:350px;
+  height:50px;
+  border:1px solid #4c3d1d;
+  padding-left:10px;
+}
+.search-input:hover, .search-input:focus {
+  box-shadow: 1px 5px 1px #4c3d1d;
+}
+
+.suggested-items {
+  list-style:none;
+  position:absolute;
+  display:block;
+  width:350px;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  z-index:1;
+}
+
+.suggested-item {
+  height:40px;
+  background-color:#e6d09a;
+  border:1px solid #4c3d1d;
+  line-height:40px;
+}
+
+.item-name {}
+
+.highlight {
+  background-color:yellow;
+}
+
+/* ############################# */
+/* ######### Filters.js ########## */
+
+.selected {
+  color:red;
+}
+
+
+.filter-form {
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.filter-form > div {
+  position:relative;
+}
+
+.filter-btn {
+  width:135px;
+  height:50px;
+  line-height:50px;
+  border:1px solid #b7245c;
+  text-transform:uppercase;
+  border-radius:5px;
+  background:#7c3238;
+  color:white;
+}
+
+.filter-btn:hover {
+  cursor:pointer;
+  background:#b7245c;
+}
+
+.active {
+  background:#b7245c;
+}
+
+.filter-checkbox {
+  appearance:none;
+  opacity:0;
+}
+
+.items-filter {
+  z-index:1;
+  position:absolute;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  background:#b7245c;
+  margin-top:-3px;
+}
+
+.filter {
+  border-bottom:1px solid #edcbb1;
+  color:white;
+  height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.filter:hover, .selected {
+  cursor:pointer;
+  background-color:#edcbb1;
+  color:black;
+}
+
+.no-display {
+  display:none;
+}
+
+/* ############################# */
+/* ######### Items.js ########## */
+
+.app-items {
+  margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+}
+
+.item {
+  opacity:0.85;
+  padding:10px;
+  margin:5px;
+  border:1px solid lightgrey;
+  border-radius:5px;
+}
+
+.item:hover {
+  opacity:1;
+  cursor:pointer;
+}
+
+.item-list {}
+
+.item-img
+
+.details {
+  color:red;
+}
+
+.details-img {}
+
+.details-name {}
+
+.details-description {}
+
+.disabled {
+  display:none;
+}
+
+/* ############################# */
+/* ######### Footer.js ########## */
 .app-footer {}

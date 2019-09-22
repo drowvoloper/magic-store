@@ -218,9 +218,9 @@
   {
     "id": "19",
     "name": "Shield +1",
-    "type": "Uncommon",
-    "subtype": "Armor",
-    "rarity": "Shield",
+    "type": "Armor",
+    "subtype": "Shield",
+    "rarity": "Uncommon",
     "tags": ["Combat","Warding"],
     "description": "While holding this shield, you have a +1 bonus to AC. This bonus is in addition to the shield's falsermal bonus to AC.\nA shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time.",
     "notes": "Bonus: Armor Class, Combat, Warding ",
