@@ -60,12 +60,16 @@ function Items({itemsToShow}) {
     return show;
   });
 
-  const handleClick = (event) => {
-    console.log(event.currentTarget.childNodes[1]);
-    const itemDetails = event.currentTarget.childNodes[1];
-    itemDetails.classList.contains('disabled') 
-      ? itemDetails.classList.remove('disabled')
-      : itemDetails.classList.add('disabled')
+  const handleClick = event => {
+    console.log(event.currentTarget.nextSibling);
+    const itemDetails = event.currentTarget.nextSibling;
+     itemDetails.classList.remove('disabled') 
+  }
+
+  const handleClose = event => {
+    const itemDetails = event.currentTarget.parentNode;
+    itemDetails.classList.add('disabled');
+    console.log(itemDetails);
   }
 
   const finallyShowedItems = showItems.map( item => {
@@ -73,16 +77,17 @@ function Items({itemsToShow}) {
       <div 
         className="item" 
         key={item.id}
-        onClick={handleClick}
       >
-        <div className="item-list">
+        <div className="item-list"
+             onClick={handleClick}
+        >
           <img 
             src={img[item.type.toLowerCase().replace(' ','')]}
             className="item-img" 
             alt="item type"/>
           <p>{item.name}</p>
         </div>
-        <div className="details disabled">
+        <div className="details-item disabled">
           <img
             src={img[item.type.toLowerCase().replace(' ','')]}
             className="details-img"
@@ -91,6 +96,10 @@ function Items({itemsToShow}) {
           <p>({item.type}, {item.rarity})</p>
           <p>Tags: {item.tags}</p>
           <p className="details-description">"{item.description}"</p>
+          <p className="close-btn" 
+            onClick={handleClose}
+          >
+            Close</p>
         </div>
       </div>
     );

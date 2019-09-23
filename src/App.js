@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Search from './components/Search';
 import Filters from './components/Filters';
 import Items from './components/Items';
-import Footer from './components/Footer';
 import './App.css';
 
 class App extends React.Component {i
@@ -38,7 +37,6 @@ class App extends React.Component {i
         <Search />
         <Filters checkFilters={this.checkFilters} />
         <Items itemsToShow={this.state} />
-        <Footer />
       </div>
     );
   }
