@@ -1,19 +1,20 @@
 import React from 'react';
+import { handleClose, handleClick } from './eventHandlers';
 
-const items = require('../magicItems.json');
+const items = require('../data/magicItems.json');
 const img = {};
-img.armor = require('../img/armor.jpg');
-img.potion = require('../img/potion.jpg');
-img.ring = require('../img/ring.jpg');
-img.rod = require('../img/rod.jpg');
-img.scroll = require('../img/scroll.jpg');
-img.staff = require('../img/staff.jpg');
-img.wand = require('../img/wand.jpg');
-img.weapon = require('../img/weapon.jpg');
-img.wondrousitem = require('../img/wondrousitem.jpg');
+img.armor = require('./img/armor.jpg');
+img.potion = require('./img/potion.jpg');
+img.ring = require('./img/ring.jpg');
+img.rod = require('./img/rod.jpg');
+img.scroll = require('./img/scroll.jpg');
+img.staff = require('./img/staff.jpg');
+img.wand = require('./img/wand.jpg');
+img.weapon = require('./img/weapon.jpg');
+img.wondrousitem = require('./img/wondrousitem.jpg');
 
-
-function Items({itemsToShow}) {
+const filterItems = itemsToShow => {
+  
 
   const { type, rarity, tag, attunement } = itemsToShow;
   const typeArr = type[0];
@@ -21,7 +22,8 @@ function Items({itemsToShow}) {
   const tagArr = tag[0];
   const attunementArr = attunement[0];
 
-  const showItems = items.filter( item => {
+  // We filter all the items which match selected conditions
+  const filteredItems = items.filter( item => {
     
     let show = true;
 
@@ -60,19 +62,10 @@ function Items({itemsToShow}) {
     return show;
   });
 
-  const handleClick = event => {
-    console.log(event.currentTarget.nextSibling);
-    const itemDetails = event.currentTarget.nextSibling;
-     itemDetails.classList.remove('disabled') 
-  }
-
-  const handleClose = event => {
-    const itemDetails = event.currentTarget.parentNode;
-    itemDetails.classList.add('disabled');
-    console.log(itemDetails);
-  }
-
-  const finallyShowedItems = showItems.map( item => {
+   // ###################################################
+ 
+  // then we show only the filtered items 
+  const showItems = filteredItems.map( item => {
     return (
       <div 
         className="item" 
@@ -105,12 +98,7 @@ function Items({itemsToShow}) {
     );
   });
 
-  return (
-  <div className="app-items">
-    { finallyShowedItems }
-    
-  </div>
- );
-};
+return showItems;
+}
 
-export default Items;
+export default filterItems;

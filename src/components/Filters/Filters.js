@@ -73,7 +73,7 @@ function Filters({checkFilters}) {
   // Filter for types
   const typeFilter = types.map( type => {
     return (
-      <li key={types.indexOf(type)} className="no-display">
+      <li key={types.indexOf(type)} className="disabled">
       <label> 
         <div className="filter type"> 
           <input 
@@ -93,7 +93,7 @@ function Filters({checkFilters}) {
   // Filter for rarity
   const rarityFilter = rarities.map( rarity => {
     return (
-      <li key={rarities.indexOf(rarity)} className="no-display">
+      <li key={rarities.indexOf(rarity)} className="disabled">
       <label> 
         <div className="filter rarity"> 
           <input 
@@ -113,7 +113,7 @@ function Filters({checkFilters}) {
   // Filter for tags
   const tagsFilter = tags.map( tag => {
     return (
-      <li key={tags.indexOf(tag)} className="no-display">
+      <li key={tags.indexOf(tag)} className="disabled">
       <label>
         <div className="filter tags">
           <input
@@ -132,16 +132,17 @@ function Filters({checkFilters}) {
 
   // Display filters
   const displayHandler = event => {
-    const displayElements = event.target.nextSibling.childNodes;
 
+    const displayElements = event.target.nextSibling.childNodes;
+console.log(displayElements);
     event.target.classList.contains('active')
       ? event.target.classList.remove('active')
       : event.target.classList.add('active');
 
     displayElements.forEach( element => {
-      element.classList.contains('no-display')
-        ? element.classList.remove('no-display') 
-        : element.classList.add('no-display');
+      element.classList.contains('disabled')
+        ? element.classList.remove('disabled') 
+        : element.classList.add('disabled');
     });
   }
 
@@ -170,7 +171,7 @@ function Filters({checkFilters}) {
       <div>
         <h4 className="filter-btn" onClick={displayHandler}>Attunement</h4>
         <ul className="items-filter">
-          <li className="no-display">
+          <li className="disabled">
           <label>
             <div className="filter">
               <input
@@ -184,7 +185,7 @@ function Filters({checkFilters}) {
             </div>
           </label>
         </li>
-        <li className="no-display">
+        <li className="disabled">
           <label>
             <div className="filter">
               <input 

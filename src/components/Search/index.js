@@ -3,7 +3,7 @@ import React from 'react';
 // this package helps to highlight text which matches item names
 const reactStringReplace = require('react-string-replace');
 
-const items = require('../magicItems.json');
+const items = require('../data/magicItems.json');
 const itemNames = items.map( item => {
   return item.name;
 });
